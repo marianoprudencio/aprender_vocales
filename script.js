@@ -24,22 +24,24 @@ function escuchar() {
 
   reconocimiento.onresult = (event) => {
     const texto = event.results[0][0].transcript.toLowerCase().trim();
-    textoEl.textContent = texto;
+
+    // Normalizar: quitar tildes y espacios
+    const normalizado = texto
+      .normalize("NFD")                     // separa caracteres como é → e + ́
+      .replace(/[\u0300-\u036f]/g, "")     // elimina marcas de tilde
+      .replace(/\s+/g, "");                // quita espacios
+
+    textoEl.textContent = normalizado;
 
     const esperado = vocales[actual];
-    const equivalencias = {
-      'a': ['a', 'ah'],
-      'e': ['e', 'eh'],
-      'i': ['i'],
-      'o': ['o', 'oh'],
-      'u': ['u']
-    };
 
-    if (equivalencias[esperado].includes(texto)) {
+    if (normalizado === esperado) {
       aciertos++;
       aciertosEl.textContent = aciertos;
       actual = (actual + 1) % vocales.length;
       letraEl.textContent = vocales[actual].toUpperCase();
+    } else {
+      alert(`Dijiste "${normalizado}", pero se esperaba "${esperado}". Intenta de nuevo.`);
     }
   };
 
