@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f0f4f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 40px 20px;
+}
+
+.vocal {
+  font-size: 96px;
+  font-weight: bold;
+  margin: 30px 0;
+  color: #2a86ff;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 20px;
+  border: none;
+  background-color: #2a86ff;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fd1;
+}
